@@ -2,6 +2,7 @@ package Engine;
 
 import IO.Keyboard;
 import IO.Mouse;
+import Tokens.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,11 @@ public class Game extends JFrame implements Runnable {
     private Keyboard keyboard;
     private Mouse mouse;
 
+    Handler handler;
+
     public Game(int width, int height) {
+
+        this.handler = new Handler();
 
         this.keyboard = new Keyboard();
         this.mouse = new Mouse();
@@ -46,6 +51,8 @@ public class Game extends JFrame implements Runnable {
 
         new DeltaTime();
 
+        Handler.add(new Player());
+
     }
     /*
     Left couple of uncommented lines in case some extra testing has to be done.
@@ -60,7 +67,7 @@ public class Game extends JFrame implements Runnable {
 
         long fps = DeltaTime.FPS;
         float oneFrameEveryMilliseconds = ((float) 1 / fps) * 1000;
-
+        int counter = 0;
         while (true) {
             DeltaTime.reset();
 
@@ -73,7 +80,7 @@ public class Game extends JFrame implements Runnable {
             //----------------------------------------------------------
             graphics.setColor(Color.BLACK);
             graphics.fillRect(0, 0, SIZE.width, SIZE.height);
-
+            handler.loop((Graphics2D) graphics);
             this.renderWindow.getBufferStrategy().show();
             //----------------------------------------------------------
             // Handling 60 FPS loop
@@ -83,6 +90,7 @@ public class Game extends JFrame implements Runnable {
             long loopTookInMilliseconds = endingTimeMill - startingTimeMill;
             // Should wait time before the next loop (I want to render every 16.66667 seconds but loop takes some time thus subtract).
             long sleepTimeInMilliseconds = (long) (oneFrameEveryMilliseconds - loopTookInMilliseconds);
+
             if (sleepTimeInMilliseconds > 0) {
                 try {
                     Thread.sleep(sleepTimeInMilliseconds);
@@ -90,8 +98,18 @@ public class Game extends JFrame implements Runnable {
                     System.exit(0);
                 }
             }
-
+            counter = handleFPS(counter);
         }
     }
+
+    public int handleFPS(int counter){
+        counter += 1;
+        if(counter == 60) {
+            //System.out.println("NOW");
+            counter = 0;
+        }
+        return counter;
+    }
+
 }
 
