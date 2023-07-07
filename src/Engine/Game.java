@@ -1,5 +1,6 @@
 package Engine;
 
+import Databases.Database;
 import Environment.Map;
 import IO.Keyboard;
 import IO.Mouse;
@@ -15,6 +16,7 @@ public class Game extends JFrame implements Runnable {
     private Graphics graphics;
 
     public static final Random RANDOM = new Random();
+    public static final int MAP_SIZE = 51;
 
     private Keyboard keyboard;
     private Mouse mouse;
@@ -52,8 +54,11 @@ public class Game extends JFrame implements Runnable {
         this.renderWindow.addKeyListener(keyboard);
 
         new DeltaTime();
+        new Database();
 
-        map = new Map(51, 51);
+        Handler.add(Database.getRandomBoss());
+
+        map = new Map(MAP_SIZE, MAP_SIZE);
     }
     /*
     Left couple of uncommented lines in case some extra testing has to be done.
@@ -81,8 +86,8 @@ public class Game extends JFrame implements Runnable {
             //----------------------------------------------------------
             graphics.setColor(Color.BLACK);
             graphics.fillRect(0, 0, SIZE.width, SIZE.height);
-            handler.loop((Graphics2D) graphics);
             map.render((Graphics2D) graphics);
+            handler.loop((Graphics2D) graphics);
             this.renderWindow.getBufferStrategy().show();
             //----------------------------------------------------------
             // Handling 60 FPS loop

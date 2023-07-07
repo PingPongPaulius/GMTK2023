@@ -22,6 +22,12 @@ public class Sprite {
         this.h = h;
     }
 
+    public Sprite(String name){
+        this.image = loadImage(name);
+        this.w = 16;
+        this.h = 16;
+    }
+
     public Sprite(BufferedImage image){
         this.image = image;
     }

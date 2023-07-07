@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Tile {
 
-    public static int SIZE = 15;
+    public static int SIZE = 16;
 
     public Tile(){
 
