@@ -1,6 +1,5 @@
 package Tokens;
 
-import Animations.AnimationHandler;
 import Animations.Sprite;
 import Engine.Game;
 import Environment.Map;
@@ -30,12 +29,17 @@ public class VIP extends Token{
 
     @Override
     public void update() {
+        handleMovementLogic();
+    }
+
+    public void handleMovementLogic(){
         boolean[] moves = Map.getPossibleMoves(x, y, SIZE);
 
         int move = Game.RANDOM.nextInt(moves.length);
 
         if(moves[move] && currMove > speed){
             currMove = 0;
+            System.out.println(Arrays.toString(moves));
             if(moves[move]) {
                 if (move == 0) x -= 1;
                 if (move == 1) x += 1;

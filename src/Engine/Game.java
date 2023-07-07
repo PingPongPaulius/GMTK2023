@@ -58,7 +58,7 @@ public class Game extends JFrame implements Runnable {
 
         Handler.add(Database.getRandomBoss());
 
-        map = new Map(MAP_SIZE, MAP_SIZE);
+        map = new Map();
     }
     /*
     Left couple of uncommented lines in case some extra testing has to be done.

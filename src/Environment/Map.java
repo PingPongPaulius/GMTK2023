@@ -3,18 +3,15 @@ package Environment;
 import Engine.Game;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Map {
 
-    private final Tile[][] map;
+    public final static Tile[][] map = new Tile[Game.MAP_SIZE][Game.MAP_SIZE];
 
-    public Map(int x, int y){
+    public Map(){
 
-        map = new Tile[y][x];
-
-        for(int i = 0; i < y; i++){
-            for(int j = 0; j < x; j++){
+        for(int i = 0; i < map.length; i++){
+            for(int j = 0; j < map[i].length; j++){
                 map[i][j] = new Tile();
             }
         }
@@ -40,10 +37,12 @@ public class Map {
 
     public static boolean[] getPossibleMoves(int x, int y, int size){
         boolean[] moves = new boolean[4];
-        moves[0] = (x > 0); // Left
-        moves[1] = (x+size < Game.MAP_SIZE); // Right
+
+        moves[0] = (x > 0);// Left
+        moves[1] = (x+size < Game.MAP_SIZE);// Right
         moves[2] = (y+size < Game.MAP_SIZE); // Down
         moves[3] = (y > 0); // UP
+
         return moves;
     }
 
