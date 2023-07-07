@@ -1,8 +1,8 @@
 package Engine;
 
+import Environment.Map;
 import IO.Keyboard;
 import IO.Mouse;
-import Tokens.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +20,8 @@ public class Game extends JFrame implements Runnable {
     private Mouse mouse;
 
     Handler handler;
+
+    public Map map;
 
     public Game(int width, int height) {
 
@@ -51,8 +53,7 @@ public class Game extends JFrame implements Runnable {
 
         new DeltaTime();
 
-        Handler.add(new Player());
-
+        map = new Map(51, 51);
     }
     /*
     Left couple of uncommented lines in case some extra testing has to be done.
@@ -81,6 +82,7 @@ public class Game extends JFrame implements Runnable {
             graphics.setColor(Color.BLACK);
             graphics.fillRect(0, 0, SIZE.width, SIZE.height);
             handler.loop((Graphics2D) graphics);
+            map.render((Graphics2D) graphics);
             this.renderWindow.getBufferStrategy().show();
             //----------------------------------------------------------
             // Handling 60 FPS loop
