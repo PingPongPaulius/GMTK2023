@@ -18,20 +18,28 @@ public class Sprite {
     private int w, h;
     private int overlayR = 0;
     private int overlayG = 0;
+
+    private String name;
     public Sprite(String name, int w, int h){
         this.image = loadImage(name);
         this.w = w;
         this.h = h;
+        this.name = name;
     }
 
     public Sprite(String name){
         this.image = loadImage(name);
         this.w = 16;
         this.h = 16;
+        this.name= name;
     }
 
     public Sprite(BufferedImage image){
         this.image = image;
+    }
+
+    public Sprite copy(int x, int y){
+        return new Sprite(name, x, y);
     }
 
     public void setSize(int w, int h){

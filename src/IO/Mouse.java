@@ -60,7 +60,9 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     public boolean clickedOn(Rectangle hitbox){
         Rectangle rectangle = new Rectangle((int)getPosition().x, (int)getPosition().y, 1, 1);
-        return hitbox.intersects(rectangle);
+        boolean out = hitbox.intersects(rectangle) && clicked;
+        if (out) clicked = false;
+        return out;
     }
 
     public Point getPosition(){

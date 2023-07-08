@@ -1,5 +1,6 @@
 package Engine;
 
+import Animations.HUD;
 import Databases.Database;
 import Environment.Map;
 import IO.Keyboard;
@@ -26,6 +27,7 @@ public class Game extends JFrame implements Runnable {
 
     public Map map;
     public Console console;
+    public HUD hud;
 
     public Game(int width, int height) {
 
@@ -33,7 +35,7 @@ public class Game extends JFrame implements Runnable {
         this.console = new Console();
         this.keyboard = new Keyboard();
         this.mouse = new Mouse();
-
+        this.hud = new HUD();
         SIZE.setSize(width, height);
 
         renderWindow = new Canvas();
@@ -65,6 +67,8 @@ public class Game extends JFrame implements Runnable {
         Handler.add(new Tank(15, 15, true));
         Handler.add(new Archer(1, 0, false));
         Handler.add(new Wizard(0 ,0, false));
+        Handler.add(new Archer(1, 22, true));
+        Handler.add(new Wizard(0 ,23, true));
     }
 
 
@@ -87,6 +91,7 @@ public class Game extends JFrame implements Runnable {
             //----------------------------------------------------------
             graphics.setColor(Color.BLACK);
             graphics.fillRect(0, 0, SIZE.width, SIZE.height);
+            this.hud.render((Graphics2D) graphics, mouse);
             map.render((Graphics2D) graphics);
             Console.render((Graphics2D) graphics);
             handler.loop((Graphics2D) graphics);

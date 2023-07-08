@@ -35,6 +35,10 @@ public class Character extends Token{
         currMove = 0;
     }
 
+    public Sprite getIcon(){
+        return this.sprite;
+    }
+
     public void setSide(boolean isRed){
         this.isRed = isRed;
     }
