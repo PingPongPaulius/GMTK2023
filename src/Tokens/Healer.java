@@ -5,6 +5,7 @@ import Engine.Handler;
 import Environment.Map;
 import Environment.Tile;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -13,7 +14,7 @@ public class Healer extends Character{
     Character target;
     public Healer(int x, int y, boolean isRed) {
         super(x, y, isRed, "Healer");
-        this.speed = 100;
+        this.speed = 90;
         this.health = 10;
         this.maxHealth = 9;
         this.farDamage = 0;
@@ -60,14 +61,8 @@ public class Healer extends Character{
 
         boolean[] moves = Map.getPossibleMoves(x, y, SIZE);
 
-        int x = 0, y = 0;
-
-        if(target.x > this.x && moves[1]) x+=1;
-        else if (target.x < this.x && moves[0]) x-=1;
-        else if (target.y > this.y && moves[2]) y+=1;
-        else if (target.y < this.y && moves[3]) y-=1;
-
-        moveBy(x, y);
+        Point move = this.handleDirectedMovement(target.x, target.y, moves);
+        moveBy(move.x, move.y);
 
     }
 

@@ -5,6 +5,7 @@ import Engine.Handler;
 import Environment.Map;
 import Environment.Tile;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -14,8 +15,8 @@ public class Tank extends Character{
 
     public Tank(int x, int y, boolean isRed) {
         super(x, y, isRed, "Warrior");
-        this.speed = 180;
-        this.health = 210;
+        this.speed = 140;
+        this.health = 50;
         this.maxHealth = 200;
         this.farDamage = 0;
         this.closeMinDamage = 1;
@@ -74,15 +75,8 @@ public class Tank extends Character{
         }
 
         boolean[] moves = Map.getPossibleMoves(x, y, SIZE);
-
-        int x = 0, y = 0;
-
-        if(target.x > this.x && moves[1]) x+=1;
-        else if (target.x < this.x && moves[0]) x-=1;
-        else if (target.y > this.y && moves[2]) y+=1;
-        else if (target.y < this.y && moves[3]) y-=1;
-
-        moveBy(x, y);
+        Point move = this.handleDirectedMovement(target.x, target.y, moves);
+        moveBy(move.x, move.y);
 
     }
 

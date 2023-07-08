@@ -91,6 +91,20 @@ public class Character extends Token{
 
     }
 
+    public Point handleDirectedMovement(int goalX, int goalY, boolean[] moves){
+
+        ArrayList<Point> possibleMoves = new ArrayList<>();
+
+        if(goalX > this.x && moves[1]) possibleMoves.add(new Point(1, 0));
+        if (goalX < this.x && moves[0]) possibleMoves.add(new Point(-1, 0));
+        if (goalY > this.y && moves[2]) possibleMoves.add(new Point(0, 1));
+        if (goalY < this.y && moves[3]) possibleMoves.add(new Point(0, -1));
+
+        if(possibleMoves.isEmpty()) return new Point(0, 0);
+
+        return possibleMoves.get(Game.RANDOM.nextInt(possibleMoves.size()));
+    }
+
     public int getMeleeDamage(){
         return Game.RANDOM.nextInt(this.closeMinDamage, this.closeMaxDamage);
     }

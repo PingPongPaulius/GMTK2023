@@ -5,6 +5,7 @@ import Engine.Handler;
 import Environment.Map;
 import Environment.Tile;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -61,14 +62,12 @@ public class Assassin extends Character{
 
         boolean[] moves = Map.getPossibleMoves(x, y, SIZE);
 
-        int x = 0, y = 0;
+        Point move = this.handleDirectedMovement(target.x, target.y, moves);
+        moveBy(move.x, move.y);
 
-        if(target.x > this.x && moves[1]) x+=1;
-        else if (target.x < this.x && moves[0]) x-=1;
-        else if (target.y > this.y && moves[2]) y+=1;
-        else if (target.y < this.y && moves[3]) y-=1;
-
-        moveBy(x, y);
+        if (move.x == 0 && move.y == 0){
+            super.handleMovementLogic();
+        }
 
     }
 

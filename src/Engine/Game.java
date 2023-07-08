@@ -65,6 +65,7 @@ public class Game extends JFrame implements Runnable {
 
         Handler.add(new Assassin(20, 20, true));
         Handler.add(new Healer(21, 20, true));
+        Handler.add(new Tank(15, 15, true));
         Handler.add(new Archer(1, 0, false));
         Handler.add(new Tank(1, 1, false));
     }
