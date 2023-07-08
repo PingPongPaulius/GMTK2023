@@ -2,19 +2,22 @@ package Tokens;
 
 import Animations.Sprite;
 import Engine.Game;
+import Engine.Handler;
 import Environment.Map;
 import Environment.Tile;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 public class Character extends Token{
 
-    Sprite sprite;
-    int x, y;
+    protected Sprite sprite;
+    protected int x, y;
 
-    boolean isRed;
+    protected boolean isRed;
 
     protected int speed = 100;
     protected int health = 100;
@@ -27,7 +30,9 @@ public class Character extends Token{
         this.sprite = new Sprite(SpriteName, SIZE* Tile.SIZE,SIZE* Tile.SIZE);
         this.x = x;
         this.y = y;
+        Map.map[x][y].contents = Optional.of(this);
         this.isRed = isRed;
+        currMove = 0;
     }
 
     public void setSide(boolean isRed){
@@ -43,10 +48,30 @@ public class Character extends Token{
     public void update() {
         handleMovementLogic();
         handleFighting();
+        if(health <= 0) {
+            Map.map[x][y].contents = Optional.empty();
+            Handler.remove(this);
+        }
+        if(currMove > speed) currMove = 0;
+        currMove++;
     }
 
     public void handleFighting(){
 
+        if(currMove <= speed) return;
+
+        ArrayList<Tile> tiles = Map.getAdjacentTiles(x, y);
+        Collections.shuffle(tiles);
+        for(Tile t: tiles){
+            if(!t.isEmpty()){
+                Character enemy = t.contents.get();
+                if(enemy.isEnemy(this)){
+                    enemy.health -= this.getMeleeDamage();
+                    System.out.println("Damage");
+                }
+                break;
+            }
+        }
     }
 
     public void handleMovementLogic(){
@@ -55,18 +80,20 @@ public class Character extends Token{
         int move = Game.RANDOM.nextInt(moves.length);
 
         if(moves[move] && currMove > speed){
-            currMove = 0;
-            System.out.println(Arrays.toString(moves));
             if(moves[move]) {
-                Map.map[x][y].contents = Optional.empty();
+                int x = 0, y = 0;
                 if (move == 0) x -= 1;
                 if (move == 1) x += 1;
                 if (move == 2) y += 1;
                 if (move == 3) y -= 1;
-                Map.map[x][y].contents = Optional.of(this);
+                moveBy(x, y);
             }
         }
-        currMove++;
+
+    }
+
+    public int getMeleeDamage(){
+        return Game.RANDOM.nextInt(this.closeMinDamage, this.closeMaxDamage);
     }
 
     @Override
@@ -79,6 +106,17 @@ public class Character extends Token{
 
     public boolean isRed(){
         return this.isRed;
+    }
+
+    public boolean isEnemy(Character token){
+        return token.isRed != this.isRed;
+    }
+
+    public void moveBy(int x, int y){
+        Map.map[this.x][this.y].contents = Optional.empty();
+        this.x += x;
+        this.y += y;
+        Map.map[this.x][this.y].contents = Optional.of(this);
     }
 
 }

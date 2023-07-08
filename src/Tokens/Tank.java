@@ -1,30 +1,38 @@
 package Tokens;
 
-import Engine.Game;
 import Engine.Handler;
 import Environment.Map;
-import Environment.Tile;
 
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Random;
-
-public class Assasin extends Character{
+public class Tank extends Character{
 
     Character target;
 
-    public Assasin(int x, int y, boolean isRed){
-        super(x, y, isRed, "Assasin");
-        this.speed = 80;
-        this.health = 20;
+    public Tank(int x, int y, boolean isRed) {
+        super(x, y, isRed, "Warrior");
+        this.speed = 180;
+        this.health = 210;
         this.farDamage = 0;
-        this.closeMinDamage = 6;
-        this.closeMaxDamage = 12;
-        this.target = null;
+        this.closeMinDamage = 0;
+        this.closeMaxDamage = 2;
+        target = null;
     }
 
     public Character findTarget(){
-        return Map.BFS(x, y, this);
+
+        Character targetCharacter = null;
+
+        for(Token t: Handler.getTokens()){
+            if(t instanceof Character c){
+                if(c.isEnemy(this)){
+                    if(targetCharacter == null) targetCharacter = c;
+                    else if(targetCharacter.closeMaxDamage <= c.closeMaxDamage){
+                        targetCharacter = c;
+                    }
+                }
+            }
+        }
+
+        return Map.BFS_Character(x, y, targetCharacter);
     }
 
     @Override

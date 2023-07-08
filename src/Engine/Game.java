@@ -5,6 +5,7 @@ import Environment.Map;
 import IO.Keyboard;
 import IO.Mouse;
 import Tokens.Assasin;
+import Tokens.Tank;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,10 +58,12 @@ public class Game extends JFrame implements Runnable {
         new DeltaTime();
         new Database();
 
-        Handler.add(new Assasin(0, 0, false));
-        Handler.add(new Assasin(2, 2, true));
-
         map = new Map();
+        Handler.add(new Assasin(1, 0, false));
+        Handler.add(new Assasin(20, 20, true));
+        Handler.add(new Tank(10, 10, false));
+        Handler.add(new Tank(11, 11, true));
+
     }
     /*
     Left couple of uncommented lines in case some extra testing has to be done.

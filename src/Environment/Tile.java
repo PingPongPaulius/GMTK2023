@@ -10,10 +10,11 @@ public class Tile {
 
     public Color c;
     public Optional<Character> contents;
-
+    public final Point point;
     public static int SIZE = 32;
-    public Tile(){
+    public Tile(int x, int y){
         this.contents = Optional.empty();
+        this.point = new Point(x, y);
     }
 
     public boolean isEmpty(){
