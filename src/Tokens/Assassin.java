@@ -71,4 +71,8 @@ public class Assassin extends Character{
 
     }
 
+    public Character copy(){
+        return new Assassin(0, 24, true);
+    }
+
 }

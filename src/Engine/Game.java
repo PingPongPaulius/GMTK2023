@@ -6,6 +6,7 @@ import Environment.Map;
 import IO.Keyboard;
 import IO.Mouse;
 import Tokens.*;
+import Tokens.Character;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,9 @@ public class Game extends JFrame implements Runnable {
     public Map map;
     public Console console;
     public HUD hud;
+
+    private boolean started;
+    private int currLevel;
 
     public Game(int width, int height) {
 
@@ -57,20 +61,37 @@ public class Game extends JFrame implements Runnable {
         this.renderWindow.addMouseMotionListener(mouse);
         this.renderWindow.addKeyListener(keyboard);
 
+        map = new Map();
+
         new DeltaTime();
         new Database();
 
-        map = new Map();
+        this.started = false;
 
-        Handler.add(new Assassin(20, 20, true));
-        Handler.add(new Healer(21, 20, true));
-        Handler.add(new Tank(15, 15, true));
-        Handler.add(new Archer(1, 0, false));
-        Handler.add(new Wizard(0 ,0, false));
-        Handler.add(new Archer(1, 22, true));
-        Handler.add(new Wizard(0 ,23, true));
+        currLevel = 1;
+        loadLevel();
     }
 
+    private void loadLevel(){
+        Handler.clear();
+
+        if(currLevel == 1){
+            Handler.add(new Archer(15, 0, false));
+            Handler.add(new Tank(15, 1, false));
+            Handler.add(new Assassin(0, 10, false));
+            Handler.add(new Assassin(24, 10, false));
+        }
+        if(currLevel == 2){
+            Handler.add(new Archer(3, 0, false));
+            Handler.add(new Archer(9, 0, false));
+            Handler.add(new Archer(20, 0, false));
+            Handler.add(new Wizard(13, 5, false));
+            Handler.add(new Healer(4, 0, false));
+            Handler.add(new Healer(13, 4, false));
+        }
+
+        ++currLevel;
+    }
 
     @Override
     public void run() {
@@ -91,10 +112,34 @@ public class Game extends JFrame implements Runnable {
             //----------------------------------------------------------
             graphics.setColor(Color.BLACK);
             graphics.fillRect(0, 0, SIZE.width, SIZE.height);
-            this.hud.render((Graphics2D) graphics, mouse);
             map.render((Graphics2D) graphics);
             Console.render((Graphics2D) graphics);
-            handler.loop((Graphics2D) graphics);
+            if(started) {
+                this.hud.render((Graphics2D) graphics, mouse);
+                handler.loop((Graphics2D) graphics);
+
+                int numReds=0, numBlues=0;
+                for(Token t: Handler.getTokens()){
+                    if(t instanceof Character c){
+                        if(c.isRed()) numReds++;
+                        else numBlues ++;
+                    }
+                }
+
+                if(numReds == 0){
+                    System.out.println("You LOSE");
+                }
+                if(numBlues == 0){
+                    loadLevel();
+                    started = false;
+                }
+
+            }
+            else{
+                started = hud.renderPrepPhase((Graphics2D) graphics, mouse);
+            }
+
+
             this.renderWindow.getBufferStrategy().show();
             //----------------------------------------------------------
             // Handling 60 FPS loop

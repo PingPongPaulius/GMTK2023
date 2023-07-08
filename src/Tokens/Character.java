@@ -1,6 +1,7 @@
 package Tokens;
 
 import Animations.Sprite;
+import Databases.Database;
 import Engine.Game;
 import Engine.Handler;
 import Environment.Map;
@@ -44,8 +45,10 @@ public class Character extends Token{
     }
 
     public void setPos(int x, int y){
+        Map.map[this.x][this.y].contents = Optional.empty();
         this.x = x;
         this.y = y;
+        Map.map[this.x][this.y].contents = Optional.of(this);
     }
 
     @Override
@@ -77,11 +80,6 @@ public class Character extends Token{
         }
     }
 
-    public void takeDamage(int x){
-        health -= x;
-        this.sprite.overlay(x > 0);
-    }
-
     public void handleMovementLogic(){
         boolean[] moves = Map.getPossibleMoves(x, y, SIZE);
 
@@ -98,6 +96,11 @@ public class Character extends Token{
             }
         }
 
+    }
+
+    public void takeDamage(int x){
+        health -= x;
+        this.sprite.overlay(x > 0);
     }
 
     public Point handleDirectedMovement(int goalX, int goalY, boolean[] moves){
@@ -147,5 +150,9 @@ public class Character extends Token{
 
     public int getY() {
         return y;
+    }
+
+    public Character copy(){
+        return null;
     }
 }

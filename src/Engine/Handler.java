@@ -1,9 +1,12 @@
 package Engine;
 
+import Environment.Map;
+import Environment.Tile;
 import Tokens.Token;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Handler {
 
@@ -34,6 +37,17 @@ public class Handler {
 
     public static ArrayList<Token> getTokens(){
         return tokens;
+    }
+
+    public static ArrayList<Token> getTokensToAdd(){return tokensToAdd;}
+
+    public static void clear(){
+        tokens.clear();
+        tokensToRemove.clear();
+        tokensToAdd.clear();
+        for(Tile[] tA: Map.map){
+            for(Tile t: tA) t.contents = Optional.empty();
+        }
     }
 
 }

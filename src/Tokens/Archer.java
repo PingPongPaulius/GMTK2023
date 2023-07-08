@@ -65,4 +65,8 @@ public class Archer extends Character{
 
     public void handleMovementLogic(){}
 
+    public Character copy(){
+        return new Archer(0, 24, true);
+    }
+
 }

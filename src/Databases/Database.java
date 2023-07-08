@@ -1,21 +1,24 @@
 package Databases;
 
 import Engine.Game;
+import Tokens.*;
 import Tokens.Character;
 
 import java.util.ArrayList;
 
 public class Database {
 
-    private static ArrayList<Character> bosses = new ArrayList<>();
+    public static ArrayList<Character> characters = new ArrayList<>();
 
     public Database(){
-
+        characters.add(new Archer(0,24, true));
+        characters.add(new Assassin(0,24, true));
+        characters.add(new Healer(0,24,true));
+        characters.add(new Tank(0,24, true));
+        characters.add(new Wizard(0,24,true));
+        characters.add(new GoofyDevil(0, 24, true));
     }
 
-    public static Character getRandomBoss(){
-        int index = Game.RANDOM.nextInt(bosses.size());
-        return bosses.get(index);
-    }
+
 
 }

@@ -128,6 +128,13 @@ public class Map {
         return new Point(20+x*Tile.SIZE, 50+y*Tile.SIZE);
     }
 
+    public static Tile getTile(int pixelsX, int pixelsY){
+        int x = (pixelsX-20)/Tile.SIZE;
+        int y = (pixelsY-50)/Tile.SIZE;
+        System.out.println(x + " " + y);
+        return map[x][y];
+    }
+
     public static boolean[] getPossibleMoves(int x, int y, int size){
         boolean[] moves = new boolean[4];
 

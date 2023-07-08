@@ -117,6 +117,8 @@ public class Wizard extends Character{
 
     }
 
-
+    public Character copy(){
+        return new Wizard(0, 24, true);
+    }
 
 }

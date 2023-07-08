@@ -80,4 +80,8 @@ public class Tank extends Character{
 
     }
 
+    public Character copy(){
+        return new Tank(0, 24, true);
+    }
+
 }

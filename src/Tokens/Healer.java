@@ -66,4 +66,8 @@ public class Healer extends Character{
 
     }
 
+    public Character copy(){
+        return new Healer(0, 24, true);
+    }
+
 }
