@@ -20,7 +20,7 @@ public class Character extends Token{
     protected boolean isRed;
 
     protected int speed = 100;
-    protected int health = 100;
+    protected int health = 100, maxHealth = 100;
     protected int closeMinDamage = 1;
     protected int closeMaxDamage = 2;
     protected int farDamage = 0;
@@ -67,7 +67,6 @@ public class Character extends Token{
                 Character enemy = t.contents.get();
                 if(enemy.isEnemy(this)){
                     enemy.health -= this.getMeleeDamage();
-                    System.out.println("Damage");
                 }
                 break;
             }
@@ -119,4 +118,11 @@ public class Character extends Token{
         Map.map[this.x][this.y].contents = Optional.of(this);
     }
 
+    public int getX(){
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }

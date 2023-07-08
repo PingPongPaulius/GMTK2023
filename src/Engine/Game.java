@@ -4,7 +4,9 @@ import Databases.Database;
 import Environment.Map;
 import IO.Keyboard;
 import IO.Mouse;
+import Tokens.Archer;
 import Tokens.Assasin;
+import Tokens.Healer;
 import Tokens.Tank;
 
 import javax.swing.*;
@@ -59,17 +61,11 @@ public class Game extends JFrame implements Runnable {
         new Database();
 
         map = new Map();
-        Handler.add(new Assasin(1, 0, false));
-        Handler.add(new Assasin(20, 20, true));
-        Handler.add(new Tank(10, 10, false));
-        Handler.add(new Tank(11, 11, true));
 
+        Handler.add(new Assasin(20, 20, true));
+        Handler.add(new Healer(21, 20, true));
+        Handler.add(new Archer(1, 0, false));
     }
-    /*
-    Left couple of uncommented lines in case some extra testing has to be done.
-    Such as Rope.
-    Perfect horizontal walls etc.
-     */
 
 
     @Override

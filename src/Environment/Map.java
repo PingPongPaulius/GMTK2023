@@ -2,7 +2,6 @@ package Environment;
 
 import Engine.Game;
 import Tokens.Character;
-import Engine.ConditionalInterface;
 
 import java.awt.*;
 import java.util.ArrayDeque;
@@ -28,7 +27,7 @@ public class Map {
         }
     }
 
-    public static Character BFS(int x, int y, Character t){
+    public static Character BFS_Closest_Enmy(int x, int y, Character t){
 
         Tile root = map[x][y];
         ArrayList<Tile> visited = new ArrayList<>();
@@ -44,6 +43,36 @@ public class Map {
             for(Tile newTile: tiles){
                 if(!newTile.isEmpty() && newTile.contents.get().isEnemy(t)){
                     return newTile.contents.get();
+                }
+                else if(!visited.contains(newTile)){
+                    queue.add(newTile);
+                    visited.add(newTile);
+                }
+            }
+        }
+        return null;
+    }
+
+    public static Character BFS_Closest_Friend(int x, int y, Character t){
+
+        Tile root = map[x][y];
+        ArrayList<Tile> visited = new ArrayList<>();
+        Queue<Tile> queue = new ArrayDeque<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+
+            Tile tile = queue.poll();
+            visited.add(tile);
+            ArrayList<Tile> tiles = getAdjacentTiles(tile.point.x,tile.point.y);
+            Collections.shuffle(tiles);
+
+            for(Tile newTile: tiles){
+                if(!newTile.isEmpty()){
+                    Character c = newTile.contents.get();
+
+                    if(!c.isEnemy(t) && c!=t) {
+                        return newTile.contents.get();
+                    }
                 }
                 else if(!visited.contains(newTile)){
                     queue.add(newTile);
@@ -87,6 +116,12 @@ public class Map {
                 map[i][j].render(g, 20+i*Tile.SIZE, 50+j*Tile.SIZE);
             }
         }
+    }
+
+    public static int distBetween(Character a, Character b){
+
+        return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
+
     }
 
     public static Point getCoordinate(int x, int y){

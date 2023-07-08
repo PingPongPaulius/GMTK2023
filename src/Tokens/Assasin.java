@@ -1,13 +1,7 @@
 package Tokens;
 
-import Engine.Game;
 import Engine.Handler;
 import Environment.Map;
-import Environment.Tile;
-
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Random;
 
 public class Assasin extends Character{
 
@@ -17,6 +11,7 @@ public class Assasin extends Character{
         super(x, y, isRed, "Assasin");
         this.speed = 80;
         this.health = 20;
+        this.maxHealth = 18;
         this.farDamage = 0;
         this.closeMinDamage = 6;
         this.closeMaxDamage = 12;
@@ -24,14 +19,14 @@ public class Assasin extends Character{
     }
 
     public Character findTarget(){
-        return Map.BFS(x, y, this);
+        return Map.BFS_Closest_Enmy(x, y, this);
     }
 
     @Override
     public void handleMovementLogic(){
 
         if(currMove <= speed) return;
-
+        // Target might get killer so then the assassin should relocate.
         if(target == null || !Handler.getTokens().contains(target)){
             target = findTarget();
         }
