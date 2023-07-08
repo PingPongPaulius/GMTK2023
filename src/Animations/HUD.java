@@ -74,7 +74,7 @@ public class HUD {
         }
     }
 
-    public boolean renderPrepPhase(Graphics2D g, Mouse mouse){
+    public boolean renderPrepPhase(Graphics2D g, Mouse mouse, int currLevel){
 
         int x = 850, y = 100;
 
@@ -86,6 +86,36 @@ public class HUD {
             start += 1;
         }
         for(Token t: Handler.getTokensToAdd()) t.render(g);
+
+        if(selected != null){
+
+            if(currLevel == 1){
+                g.setColor(Color.black);
+                g.fillRect(300, 450, 200, 20);
+                g.setColor(Color.WHITE);
+                g.drawString("Now click on green zone to place it", 305, 465);
+            }
+
+            g.setColor( new Color(72, 255, 0, 178));
+            int startingSquare = 14;
+            Point p = Map.getCoordinate(0, startingSquare);
+            Rectangle deployZone = new Rectangle(p.x, p.y, Game.MAP_SIZE*Tile.SIZE, (Game.MAP_SIZE - startingSquare)*Tile.SIZE);
+            g.fillRect(deployZone.x, deployZone.y, deployZone.width, deployZone.height);
+
+            if(mouse.clickedOn(deployZone)){
+                Tile t = Map.getTile(mouse.getPosition().x, mouse.getPosition().y);
+                if(t.isEmpty()) {
+                    selected.setPos(t.point.x, t.point.y);
+                    Handler.add(selected);
+                    selected = null;
+                }
+                else{
+                    System.out.println("Cant Place here");
+                }
+            }
+
+        }
+
         for(int i = start; i < roleList.size(); i++){
             if(i >= start+6) {
                 break;
@@ -123,27 +153,10 @@ public class HUD {
             start -= 1;
         }
 
-        if(selected != null){
-            g.setColor( new Color(72, 255, 0, 178));
-            int startingSquare = 14;
-            Point p = Map.getCoordinate(0, startingSquare);
-            Rectangle deployZone = new Rectangle(p.x, p.y, Game.MAP_SIZE*Tile.SIZE, (Game.MAP_SIZE - startingSquare)*Tile.SIZE);
-            g.fillRect(deployZone.x, deployZone.y, deployZone.width, deployZone.height);
-
-            if(mouse.clickedOn(deployZone)){
-                Tile t = Map.getTile(mouse.getPosition().x, mouse.getPosition().y);
-                if(t.isEmpty()) {
-                    selected.setPos(t.point.x, t.point.y);
-                    Handler.add(selected);
-                    selected = null;
-                }
-                else{
-                    System.out.println("Cant Place here");
-                }
-            }
-
+        if(currLevel == 1 && Handler.getTokensToAdd().size() > 1){
+            g.setColor(Color.WHITE);
+            g.drawString("to start battle click ->", 740, 870);
         }
-
 
         startButton.render(g, 850, 850);
         return mouse.clickedOn(new Rectangle(850, 850, 100, 32));

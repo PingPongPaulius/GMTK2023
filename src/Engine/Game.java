@@ -8,6 +8,7 @@ import IO.Keyboard;
 import IO.Mouse;
 import Tokens.*;
 import Tokens.Character;
+import com.sun.source.tree.WhileLoopTree;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,12 +70,16 @@ public class Game extends JFrame implements Runnable {
 
         this.started = false;
 
-        currLevel = 1;
+        currLevel = 0;
         loadLevel();
     }
 
     private void loadLevel(){
         Handler.clear();
+
+        if(currLevel == 0){
+            Handler.add(new Dummy(0, 0, false));
+        }
 
         if(currLevel == 1){
             Handler.add(new Archer(15, 0, false));
@@ -138,9 +143,24 @@ public class Game extends JFrame implements Runnable {
                     started = false;
                 }
 
+                if(currLevel == 1){
+                    graphics.setColor(new Color(0,0,0));
+                    graphics.fillRect(650, 150, 170, 20);
+                    graphics.setColor(new Color(255,255, 255));
+                    graphics.drawString("Click on hero to reverse roles ->", 655, 165);
+                }
+
             }
             else{
-                started = hud.renderPrepPhase((Graphics2D) graphics, mouse);
+                if (currLevel == 1){
+                    graphics.setColor(new Color(0,0,0));
+                    graphics.fillRect(60, 60, 200, 20);
+                    graphics.setColor(new Color(255,255, 255));
+                    graphics.drawString("<- Enemy has background blue.", 60, 75);
+
+                    graphics.drawString("Chose your fighter by clicking on them.", 750, 20);
+                }
+                started = hud.renderPrepPhase((Graphics2D) graphics, mouse, currLevel);
             }
 
 
