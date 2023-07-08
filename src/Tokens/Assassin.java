@@ -1,13 +1,18 @@
 package Tokens;
 
+import Engine.Console;
 import Engine.Handler;
 import Environment.Map;
+import Environment.Tile;
 
-public class Assasin extends Character{
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Assassin extends Character{
 
     Character target;
 
-    public Assasin(int x, int y, boolean isRed){
+    public Assassin(int x, int y, boolean isRed){
         super(x, y, isRed, "Assasin");
         this.speed = 80;
         this.health = 20;
@@ -20,6 +25,25 @@ public class Assasin extends Character{
 
     public Character findTarget(){
         return Map.BFS_Closest_Enmy(x, y, this);
+    }
+
+    public void handleFighting(){
+
+        if(currMove <= speed) return;
+
+        ArrayList<Tile> tiles = Map.getAdjacentTiles(x, y);
+        Collections.shuffle(tiles);
+        for(Tile t: tiles){
+            if(!t.isEmpty()){
+                Character enemy = t.contents.get();
+                if(enemy.isEnemy(this)){
+                    int damage = this.getMeleeDamage();
+                    Console.log("Assassin has inflicted: " + damage + " damage to " + enemy.getClass().getSimpleName());
+                    enemy.health -= damage;
+                }
+                break;
+            }
+        }
     }
 
     @Override

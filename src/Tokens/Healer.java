@@ -1,5 +1,6 @@
 package Tokens;
 
+import Engine.Console;
 import Engine.Handler;
 import Environment.Map;
 import Environment.Tile;
@@ -35,6 +36,7 @@ public class Healer extends Character{
             if(!t.isEmpty()){
                 Character friend = t.contents.get();
                 if(!friend.isEnemy(this) && friend.health < friend.maxHealth){
+                    Console.log("Healer has healed " + friend.getClass().getSimpleName());
                     friend.health += 1;
                 }
                 break;

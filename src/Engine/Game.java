@@ -5,7 +5,7 @@ import Environment.Map;
 import IO.Keyboard;
 import IO.Mouse;
 import Tokens.Archer;
-import Tokens.Assasin;
+import Tokens.Assassin;
 import Tokens.Healer;
 import Tokens.Tank;
 
@@ -28,11 +28,12 @@ public class Game extends JFrame implements Runnable {
     Handler handler;
 
     public Map map;
+    public Console console;
 
     public Game(int width, int height) {
 
         this.handler = new Handler();
-
+        this.console = new Console();
         this.keyboard = new Keyboard();
         this.mouse = new Mouse();
 
@@ -41,7 +42,7 @@ public class Game extends JFrame implements Runnable {
         renderWindow = new Canvas();
         renderWindow.setSize(SIZE);
 
-        this.setTitle("GMTK 2023 GAME");
+        this.setTitle("Role Switch");
         this.setSize(SIZE);
         this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -62,9 +63,10 @@ public class Game extends JFrame implements Runnable {
 
         map = new Map();
 
-        Handler.add(new Assasin(20, 20, true));
+        Handler.add(new Assassin(20, 20, true));
         Handler.add(new Healer(21, 20, true));
         Handler.add(new Archer(1, 0, false));
+        Handler.add(new Tank(1, 1, false));
     }
 
 
@@ -88,6 +90,7 @@ public class Game extends JFrame implements Runnable {
             graphics.setColor(Color.BLACK);
             graphics.fillRect(0, 0, SIZE.width, SIZE.height);
             map.render((Graphics2D) graphics);
+            Console.render((Graphics2D) graphics);
             handler.loop((Graphics2D) graphics);
             this.renderWindow.getBufferStrategy().show();
             //----------------------------------------------------------

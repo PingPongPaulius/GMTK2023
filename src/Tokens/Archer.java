@@ -1,5 +1,6 @@
 package Tokens;
 
+import Engine.Console;
 import Engine.Game;
 import Environment.Map;
 import Environment.Tile;
@@ -12,7 +13,7 @@ public class Archer extends Character{
     Character target;
 
     public Archer(int x, int y, boolean isRed) {
-        super(x, y, isRed, "Skelleton");
+        super(x, y, isRed, "Archer");
         this.speed = 100;
         this.health = 40;
         this.maxHealth = 37;
@@ -43,16 +44,21 @@ public class Archer extends Character{
             if(!t.isEmpty()){
                 Character enemy = t.contents.get();
                 if(enemy.isEnemy(this)){
-                    enemy.health -= this.getMeleeDamage();
+                    int damage = this.getMeleeDamage();
+                    enemy.health -= damage;
                     damaged = true;
+                    Console.log("Archer Did Melee damage: " + damage + " to " + target.getClass().getSimpleName());
                 }
             }
         }
 
         if(!damaged){
+            int damage = 0;
             if(Map.distBetween(this, target) <= 5 || Game.RANDOM.nextInt(0, 2) == 1){
+                damage = this.farDamage;
                 target.health -= this.farDamage;
             }
+            Console.log("Archer did ranged damage: " + damage + " to " + target.getClass().getSimpleName());
         }
 
     }

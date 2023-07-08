@@ -1,7 +1,12 @@
 package Tokens;
 
+import Engine.Console;
 import Engine.Handler;
 import Environment.Map;
+import Environment.Tile;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Tank extends Character{
 
@@ -34,6 +39,25 @@ public class Tank extends Character{
         }
 
         return Map.BFS_Character(x, y, targetCharacter);
+    }
+
+    public void handleFighting(){
+
+        if(currMove <= speed) return;
+
+        ArrayList<Tile> tiles = Map.getAdjacentTiles(x, y);
+        Collections.shuffle(tiles);
+        for(Tile t: tiles){
+            if(!t.isEmpty()){
+                Character enemy = t.contents.get();
+                if(enemy.isEnemy(this)){
+                    int damage = this.getMeleeDamage();
+                    Console.log("Tank has inflicted: " + damage + " damage to " + enemy.getClass().getSimpleName());
+                    enemy.health -= damage;
+                }
+                break;
+            }
+        }
     }
 
     @Override
