@@ -3,6 +3,7 @@ package Environment;
 import Engine.Game;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Map {
 
@@ -32,16 +33,35 @@ public class Map {
     }
 
     public static Point getCoordinate(int x, int y){
-        return new Point(85+x*Tile.SIZE, 50+y*Tile.SIZE);
+        return new Point(20+x*Tile.SIZE, 50+y*Tile.SIZE);
     }
 
     public static boolean[] getPossibleMoves(int x, int y, int size){
         boolean[] moves = new boolean[4];
 
-        moves[0] = (x > 0) && map[x-1][y].empty;// Left
-        moves[1] = (x+size < Game.MAP_SIZE) && map[x+1][y].empty;// Right
-        moves[2] = (y+size < Game.MAP_SIZE) && map[x][y+1].empty;; // Down
-        moves[3] = (y > 0) && map[x][y-1].empty; // UP
+        moves[0] = (x > 0) && map[x-1][y].isEmpty();// Left
+        moves[1] = (x+size < Game.MAP_SIZE) && map[x+1][y].isEmpty();// Right
+        moves[2] = (y+size < Game.MAP_SIZE) && map[x][y+1].isEmpty();; // Down
+        moves[3] = (y > 0) && map[x][y-1].isEmpty(); // Up
+
+        return moves;
+    }
+
+    public static ArrayList<Tile> getAdjacentTiles(int x, int y){
+        var moves = new ArrayList<Tile>();
+        int size = 1;
+        if((x > 0) && map[x-1][y].isEmpty()){
+            moves.add(map[x-1][y]);
+        }
+        if((x+size < Game.MAP_SIZE) && map[x+1][y].isEmpty()){
+            moves.add(map[x+1][y]);
+        }
+        if((y+size < Game.MAP_SIZE) && map[x][y+1].isEmpty()){
+            moves.add(map[x][y+1]);
+        }
+        if((y > 0) && map[x][y-1].isEmpty()){
+            moves.add(map[x][y-1]);
+        }
 
         return moves;
     }

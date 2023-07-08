@@ -4,6 +4,7 @@ import Databases.Database;
 import Environment.Map;
 import IO.Keyboard;
 import IO.Mouse;
+import Tokens.Assasin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,7 +57,8 @@ public class Game extends JFrame implements Runnable {
         new DeltaTime();
         new Database();
 
-        Handler.add(Database.getRandomBoss());
+        Handler.add(new Assasin(0, 0, false));
+        Handler.add(new Assasin(2, 2, true));
 
         map = new Map();
     }

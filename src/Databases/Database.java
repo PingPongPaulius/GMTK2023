@@ -10,7 +10,7 @@ public class Database {
     private static ArrayList<Character> bosses = new ArrayList<>();
 
     public Database(){
-        bosses.add(new Character());
+
     }
 
     public static Character getRandomBoss(){
