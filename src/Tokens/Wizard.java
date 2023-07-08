@@ -19,6 +19,7 @@ public class Wizard extends Character{
         this.speed = 200;
         this.health = 15;
         this.maxHealth = 25;
+        this.startingHealth = 15;
         this.farDamage = 5;
         this.closeMinDamage = 3;
         this.closeMaxDamage = 6;

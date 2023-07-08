@@ -16,6 +16,7 @@ public class Healer extends Character{
         super(x, y, isRed, "Healer");
         this.speed = 90;
         this.health = 10;
+        this.startingHealth = 10;
         this.maxHealth = 9;
         this.farDamage = 0;
         this.closeMinDamage = 0;

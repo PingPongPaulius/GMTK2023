@@ -13,6 +13,7 @@ public class GoofyDevil extends Character{
         super(x, y, isRed, "DevilBoss");
         this.speed = 80;
         this.health = 1;
+        this.startingHealth = 1;
         this.maxHealth = 100;
         this.farDamage = 0;
         this.closeMinDamage = 0;

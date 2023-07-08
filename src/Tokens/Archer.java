@@ -16,6 +16,7 @@ public class Archer extends Character{
         super(x, y, isRed, "Archer");
         this.speed = 100;
         this.health = 25;
+        this.startingHealth = 25;
         this.maxHealth = 22;
         this.farDamage = 3;
         this.closeMinDamage = 0;

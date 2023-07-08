@@ -18,6 +18,7 @@ public class Assassin extends Character{
         this.speed = 80;
         this.health = 20;
         this.maxHealth = 18;
+        this.startingHealth = 20;
         this.farDamage = 0;
         this.closeMinDamage = 6;
         this.closeMaxDamage = 12;

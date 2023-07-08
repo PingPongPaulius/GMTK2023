@@ -28,6 +28,8 @@ public class Character extends Token{
     protected int farDamage = 0;
     protected final int SIZE = 1;
     protected int currMove = 0;
+
+    public int startingHealth = 100;
     public Character(int x, int y, boolean isRed, String SpriteName){
         this.sprite = new Sprite(SpriteName, SIZE* Tile.SIZE,SIZE* Tile.SIZE);
         this.x = x;

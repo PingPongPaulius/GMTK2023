@@ -18,6 +18,7 @@ public class Tank extends Character{
         this.speed = 140;
         this.health = 50;
         this.maxHealth = 60;
+        this.startingHealth = 50;
         this.farDamage = 0;
         this.closeMinDamage = 1;
         this.closeMaxDamage = 2;
