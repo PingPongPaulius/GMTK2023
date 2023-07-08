@@ -1,6 +1,7 @@
 package Engine;
 
 import Animations.HUD;
+import Animations.Sprite;
 import Databases.Database;
 import Environment.Map;
 import IO.Keyboard;
@@ -127,7 +128,9 @@ public class Game extends JFrame implements Runnable {
                 }
 
                 if(numReds == 0){
-                    System.out.println("You LOSE");
+                    Sprite s = new Sprite("LoseScreen", 100, 100);
+                    s.render((Graphics2D) graphics, 400, 400);
+
                 }
                 if(numBlues == 0){
                     loadLevel();

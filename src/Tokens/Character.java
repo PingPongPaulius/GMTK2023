@@ -21,7 +21,8 @@ public class Character extends Token{
     protected boolean isRed;
 
     protected int speed = 100;
-    protected int health = 100, maxHealth = 100;
+    public int health = 100;
+    protected int maxHealth = 100;
     protected int closeMinDamage = 1;
     protected int closeMaxDamage = 2;
     protected int farDamage = 0;
@@ -150,6 +151,14 @@ public class Character extends Token{
 
     public int getY() {
         return y;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     public Character copy(){

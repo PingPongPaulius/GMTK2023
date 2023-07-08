@@ -17,7 +17,7 @@ public class Tank extends Character{
         super(x, y, isRed, "Warrior");
         this.speed = 140;
         this.health = 50;
-        this.maxHealth = 200;
+        this.maxHealth = 60;
         this.farDamage = 0;
         this.closeMinDamage = 1;
         this.closeMaxDamage = 2;

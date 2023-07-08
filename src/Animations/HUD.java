@@ -51,6 +51,19 @@ public class HUD {
                 g.fillRect(x, y, SIZE, SIZE);
                 c.getIcon().copy(64, 64).render(g, x + 4, y + 4);
 
+                if(mouse.clickedOn(new Rectangle(x, y, SIZE, SIZE)) && c.isRed()){
+                    Database.reverseRole(c);
+                }
+
+                int maxSize = 50;
+
+                int currSize = c.getHealth() * maxSize / c.getMaxHealth();
+
+                g.setColor(Color.RED);
+                g.fillRect(x+5, y+70, maxSize, 20);
+                g.setColor(Color.GREEN);
+                g.fillRect(x+5, y+70, currSize, 20);
+
                 y += SIZE + 20;
             }
         }
