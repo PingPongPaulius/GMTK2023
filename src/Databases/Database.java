@@ -45,8 +45,8 @@ public class Database {
             return;
         }
 
+        reversed.health = c.health;
         if(reversed.health > reversed.startingHealth) reversed.health = reversed.startingHealth;
-        if(reversed.health < 1) reversed.health = 1;
 
         Handler.add(reversed);
     }
