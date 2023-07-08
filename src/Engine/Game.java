@@ -16,7 +16,7 @@ public class Game extends JFrame implements Runnable {
     private Graphics graphics;
 
     public static final Random RANDOM = new Random();
-    public static final int MAP_SIZE = 51;
+    public static final int MAP_SIZE = 25;
 
     private Keyboard keyboard;
     private Mouse mouse;

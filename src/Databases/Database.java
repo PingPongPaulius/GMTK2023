@@ -1,19 +1,19 @@
 package Databases;
 
 import Engine.Game;
-import Tokens.VIP;
+import Tokens.Character;
 
 import java.util.ArrayList;
 
 public class Database {
 
-    private static ArrayList<VIP> bosses = new ArrayList<>();
+    private static ArrayList<Character> bosses = new ArrayList<>();
 
     public Database(){
-        bosses.add(new VIP());
+        bosses.add(new Character());
     }
 
-    public static VIP getRandomBoss(){
+    public static Character getRandomBoss(){
         int index = Game.RANDOM.nextInt(bosses.size());
         return bosses.get(index);
     }

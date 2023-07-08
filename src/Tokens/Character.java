@@ -3,21 +3,22 @@ package Tokens;
 import Animations.Sprite;
 import Engine.Game;
 import Environment.Map;
+import Environment.Tile;
 
 import java.awt.*;
 import java.util.Arrays;
 
-public class VIP extends Token{
+public class Character extends Token{
 
     Sprite sprite;
     int x, y;
 
     private int speed = 100;
 
-    private final int SIZE = 2;
+    private final int SIZE = 1;
     private int currMove = 0;
-    public VIP(){
-        this.sprite = new Sprite("DevilBoss", SIZE*16,SIZE*16);
+    public Character(){
+        this.sprite = new Sprite("Assasin", SIZE* Tile.SIZE,SIZE* Tile.SIZE);
         x = 0;
         y = 0;
     }
