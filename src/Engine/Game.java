@@ -4,10 +4,7 @@ import Databases.Database;
 import Environment.Map;
 import IO.Keyboard;
 import IO.Mouse;
-import Tokens.Archer;
-import Tokens.Assassin;
-import Tokens.Healer;
-import Tokens.Tank;
+import Tokens.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,7 +64,7 @@ public class Game extends JFrame implements Runnable {
         Handler.add(new Healer(21, 20, true));
         Handler.add(new Tank(15, 15, true));
         Handler.add(new Archer(1, 0, false));
-        Handler.add(new Tank(1, 1, false));
+        Handler.add(new Wizard(0 ,0, false));
     }
 
 
