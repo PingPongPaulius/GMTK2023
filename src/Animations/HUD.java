@@ -85,7 +85,7 @@ public class HUD {
         if(mouse.clickedOn(new Rectangle(x, 50, 100, 32)) && start+6 < roleList.size()){
             start += 1;
         }
-
+        for(Token t: Handler.getTokensToAdd()) t.render(g);
         for(int i = start; i < roleList.size(); i++){
             if(i >= start+6) {
                 break;
@@ -99,9 +99,19 @@ public class HUD {
                 g.fillRect(x, y, SIZE, SIZE);
                 c.getIcon().copy(64, 64).render(g, x+4, y+4);
 
+                if(mouse.hoveredOn(new Rectangle(x, y, SIZE, SIZE))){
+                    g.setColor(Color.BLACK);
+                    g.fillRect(600, y, 200, 400);
+                    g.setColor(Color.WHITE);
+                    int Y = y;
+                    for(String s: c.parseInfo()){
+                        g.drawString(s, 625, Y+100);
+                        Y += 30;
+                    }
+                }
+
                 if(mouse.clickedOn(new Rectangle(x, y, SIZE, SIZE))){
                     selected = c.copy();
-                    System.out.println(selected);
                 }
 
                 y+=SIZE+20;
@@ -134,7 +144,7 @@ public class HUD {
 
         }
 
-        for(Token t: Handler.getTokensToAdd()) t.render(g);
+
         startButton.render(g, 850, 850);
         return mouse.clickedOn(new Rectangle(850, 850, 100, 32));
     }

@@ -116,8 +116,9 @@ public class Game extends JFrame implements Runnable {
             map.render((Graphics2D) graphics);
             Console.render((Graphics2D) graphics);
             if(started) {
-                this.hud.render((Graphics2D) graphics, mouse);
+
                 handler.loop((Graphics2D) graphics);
+                this.hud.render((Graphics2D) graphics, mouse);
 
                 int numReds=0, numBlues=0;
                 for(Token t: Handler.getTokens()){

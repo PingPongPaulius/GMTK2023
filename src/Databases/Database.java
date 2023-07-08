@@ -24,21 +24,21 @@ public class Database {
         Handler.remove(c);
         Character reversed;
         if(c instanceof Archer){
-            reversed = new Assassin(c.getX(), c.getY(), c.isRed());
-        }
-        else if(c instanceof Assassin){
-            reversed = new Archer(c.getX(), c.getY(), c.isRed());
-        }
-        else if(c instanceof GoofyDevil){
             reversed = new Wizard(c.getX(), c.getY(), c.isRed());
         }
         else if(c instanceof Wizard){
-            reversed = new GoofyDevil(c.getX(), c.getY(), c.isRed());
+            reversed = new Archer(c.getX(), c.getY(), c.isRed());
         }
-        else if(c instanceof Tank){
+        else if(c instanceof GoofyDevil){
             reversed = new Healer(c.getX(), c.getY(), c.isRed());
         }
         else if(c instanceof Healer){
+            reversed = new GoofyDevil(c.getX(), c.getY(), c.isRed());
+        }
+        else if(c instanceof Tank){
+            reversed = new Assassin(c.getX(), c.getY(), c.isRed());
+        }
+        else if(c instanceof Assassin){
             reversed = new Tank(c.getX(), c.getY(), c.isRed());
         }
         else{

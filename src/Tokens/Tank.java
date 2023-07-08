@@ -84,4 +84,11 @@ public class Tank extends Character{
         return new Tank(0, 24, true);
     }
 
+    public ArrayList<String> parseInfo(){
+        var out = super.parseInfo();
+        out.add("Moves towards an enemy unit.");
+        out.add("Which deals largest damage");
+        return out;
+    }
+
 }

@@ -65,6 +65,12 @@ public class Mouse implements MouseListener, MouseMotionListener {
         return out;
     }
 
+    public boolean hoveredOn(Rectangle hitbox){
+        Rectangle rectangle = new Rectangle((int)getPosition().x, (int)getPosition().y, 1, 1);
+
+        return hitbox.intersects(rectangle);
+    }
+
     public Point getPosition(){
         return relativePos;
     }

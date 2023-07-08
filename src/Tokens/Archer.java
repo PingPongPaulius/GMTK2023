@@ -69,4 +69,10 @@ public class Archer extends Character{
         return new Archer(0, 24, true);
     }
 
+    public ArrayList<String> parseInfo(){
+        var out = super.parseInfo();
+        out.add("Does not move");
+        return out;
+    }
+
 }

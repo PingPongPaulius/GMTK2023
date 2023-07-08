@@ -56,4 +56,12 @@ public class GoofyDevil extends Character{
         return new GoofyDevil(0,24, true);
     }
 
+    public ArrayList<String> parseInfo(){
+        var out = new ArrayList<String>();
+        out.add("Moves randomly");
+        out.add("One-shots anything adjacent");
+        out.add("dies after a one-shot");
+        return out;
+    }
+
 }

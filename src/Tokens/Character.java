@@ -164,4 +164,15 @@ public class Character extends Token{
     public Character copy(){
         return null;
     }
+
+    public ArrayList<String> parseInfo(){
+        var output = new ArrayList<String>();
+        output.add("Speed: " + speed);
+        output.add("Max Health: " + maxHealth);
+        output.add("Min Melee Damage: " + closeMinDamage);
+        output.add("Max Melee Damage: " + closeMaxDamage);
+        output.add("Ranged Damage: " + farDamage);
+        return output;
+    }
+
 }

@@ -12,8 +12,8 @@ public class Dummy extends Character{
         this.health = 1;
         this.maxHealth = 1;
         this.farDamage = 0;
-        this.closeMinDamage = 0;
-        this.closeMaxDamage = 1;
+        this.closeMinDamage = 100;
+        this.closeMaxDamage = 200;
     }
 
     @Override

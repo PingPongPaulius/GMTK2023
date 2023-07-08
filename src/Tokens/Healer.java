@@ -70,4 +70,11 @@ public class Healer extends Character{
         return new Healer(0, 24, true);
     }
 
+    public ArrayList<String> parseInfo(){
+        var out = super.parseInfo();
+        out.add("Follows Teammates");
+        out.add("Heals team-mates by 1");
+        return out;
+    }
+
 }

@@ -75,4 +75,10 @@ public class Assassin extends Character{
         return new Assassin(0, 24, true);
     }
 
+    public ArrayList<String> parseInfo(){
+        var out = super.parseInfo();
+        out.add("Moves towards a certain target.");
+        return out;
+    }
+
 }

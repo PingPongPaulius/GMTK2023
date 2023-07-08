@@ -121,4 +121,13 @@ public class Wizard extends Character{
         return new Wizard(0, 24, true);
     }
 
+    public ArrayList<String> parseInfo(){
+        var out = super.parseInfo();
+        out.add("Moves randomly");
+        out.add("Shots randomly");
+        out.add("Places dummies");
+        out.add("To Distract enemies");
+        return out;
+    }
+
 }
