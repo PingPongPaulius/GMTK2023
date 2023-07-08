@@ -15,8 +15,8 @@ public class Archer extends Character{
     public Archer(int x, int y, boolean isRed) {
         super(x, y, isRed, "Archer");
         this.speed = 100;
-        this.health = 40;
-        this.maxHealth = 37;
+        this.health = 25;
+        this.maxHealth = 22;
         this.farDamage = 3;
         this.closeMinDamage = 0;
         this.closeMaxDamage = 2;
@@ -45,7 +45,7 @@ public class Archer extends Character{
                 Character enemy = t.contents.get();
                 if(enemy.isEnemy(this)){
                     int damage = this.getMeleeDamage();
-                    enemy.health -= damage;
+                    enemy.takeDamage(damage);
                     damaged = true;
                     Console.log("Archer Did Melee damage: " + damage + " to " + target.getClass().getSimpleName());
                 }
@@ -56,7 +56,7 @@ public class Archer extends Character{
             int damage = 0;
             if(Map.distBetween(this, target) <= 5 || Game.RANDOM.nextInt(0, 2) == 1){
                 damage = this.farDamage;
-                target.health -= this.farDamage;
+                target.takeDamage(damage);
             }
             Console.log("Archer did ranged damage: " + damage + " to " + target.getClass().getSimpleName());
         }

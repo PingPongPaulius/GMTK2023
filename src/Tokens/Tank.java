@@ -54,7 +54,7 @@ public class Tank extends Character{
                 if(enemy.isEnemy(this)){
                     int damage = this.getMeleeDamage();
                     Console.log("Tank has inflicted: " + damage + " damage to " + enemy.getClass().getSimpleName());
-                    enemy.health -= damage;
+                    enemy.takeDamage(damage);
                 }
                 break;
             }

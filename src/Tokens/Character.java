@@ -66,11 +66,16 @@ public class Character extends Token{
             if(!t.isEmpty()){
                 Character enemy = t.contents.get();
                 if(enemy.isEnemy(this)){
-                    enemy.health -= this.getMeleeDamage();
+                    enemy.takeDamage(getMeleeDamage());
                 }
                 break;
             }
         }
+    }
+
+    public void takeDamage(int x){
+        health -= x;
+        this.sprite.overlay(x > 0);
     }
 
     public void handleMovementLogic(){

@@ -38,7 +38,7 @@ public class Healer extends Character{
                 Character friend = t.contents.get();
                 if(!friend.isEnemy(this) && friend.health < friend.maxHealth){
                     Console.log("Healer has healed " + friend.getClass().getSimpleName());
-                    friend.health += 1;
+                    friend.takeDamage(-1);
                 }
                 break;
             }

@@ -40,7 +40,7 @@ public class Assassin extends Character{
                 if(enemy.isEnemy(this)){
                     int damage = this.getMeleeDamage();
                     Console.log("Assassin has inflicted: " + damage + " damage to " + enemy.getClass().getSimpleName());
-                    enemy.health -= damage;
+                    enemy.takeDamage(damage);
                 }
                 break;
             }

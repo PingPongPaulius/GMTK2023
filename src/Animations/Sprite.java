@@ -16,6 +16,8 @@ public class Sprite {
 
     BufferedImage image;
     private int w, h;
+    private int overlayR = 0;
+    private int overlayG = 0;
     public Sprite(String name, int w, int h){
         this.image = loadImage(name);
         this.w = w;
@@ -38,7 +40,16 @@ public class Sprite {
     }
 
     public void render(Graphics2D g, double x, double y){
+
         g.drawImage(image, (int) x, (int) y, w, h, null);
+        if(overlayR-- > 0){
+            g.setColor(new Color(157, 26, 26, 152));
+            g.fillRect((int)x, (int)y, w, h);
+        }
+        if(overlayG-- > 0){
+            g.setColor(new Color(30, 157, 26, 152));
+            g.fillRect((int)x, (int)y, w, h);
+        }
     }
 
     public static BufferedImage loadImage(String name){
@@ -68,5 +79,13 @@ public class Sprite {
 
         return output;
     }
+
+    public void overlay(boolean R){
+        if(R)
+            this.overlayR = 10;
+        else
+            this.overlayG = 10;
+    }
+
 }
 
