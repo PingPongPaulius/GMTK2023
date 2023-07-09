@@ -9,11 +9,9 @@ import Environment.Tile;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.Random;
 
 public class Wizard extends Character{
 
-    Character target;
     public Wizard(int x, int y, boolean isRed) {
         super(x, y, isRed, "Wizard");
         this.speed = 200;

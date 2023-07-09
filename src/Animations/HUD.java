@@ -34,8 +34,8 @@ public class HUD {
 
         up.render(g, 850, 50);
 
-        if (mouse.clickedOn(new Rectangle(x, 50, 100, 32)) && start + 6 < Handler.getTokens().size()) {
-            start += 1;
+        if (mouse.clickedOn(new Rectangle(x, 50, 100, 32))&& start > 0) {
+            start -= 1;
         }
 
         for (int i = start; i < Handler.getTokens().size(); i++) {
@@ -69,8 +69,8 @@ public class HUD {
         }
 
         down.render(g, x, y);
-        if (mouse.clickedOn(new Rectangle(x, y, 100, 32)) && start > 0) {
-            start -= 1;
+        if (mouse.clickedOn(new Rectangle(x, y, 100, 32))  && start + 6 < Handler.getTokens().size() ) {
+            start += 1;
         }
     }
 
@@ -82,8 +82,8 @@ public class HUD {
 
         ArrayList<Character> roleList = Database.characters;
 
-        if(mouse.clickedOn(new Rectangle(x, 50, 100, 32)) && start+6 < roleList.size()){
-            start += 1;
+        if(mouse.clickedOn(new Rectangle(x, 50, 100, 32)) && start > 0 ){
+            start -= 1;
         }
         for(Token t: Handler.getTokensToAdd()) t.render(g);
 
@@ -131,12 +131,16 @@ public class HUD {
                 c.getIcon().copy(64, 64).render(g, x+4, y+4);
 
                 if(mouse.hoveredOn(new Rectangle(x, y, SIZE, SIZE))){
+                    int offset = 0;
+                    if(i >= start+4){
+                        offset -= 300;
+                    }
                     g.setColor(Color.BLACK);
-                    g.fillRect(600, y, 200, 400);
+                    g.fillRect(600, y+offset, 200, 400);
                     g.setColor(Color.WHITE);
                     int Y = y;
                     for(String s: c.parseInfo()){
-                        g.drawString(s, 625, Y+100);
+                        g.drawString(s, 625, Y+100+offset);
                         Y += 30;
                     }
                 }
@@ -150,8 +154,8 @@ public class HUD {
         }
 
         down.render(g, x, y);
-        if(mouse.clickedOn(new Rectangle(x, y, 100, 32)) && start > 0){
-            start -= 1;
+        if(mouse.clickedOn(new Rectangle(x, y, 100, 32)) && start+6 < roleList.size() ){
+            start += 1;
         }
 
         if(currLevel == 1 && Handler.getTokensToAdd().size() > 1){

@@ -9,24 +9,22 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Assassin extends Character{
+public class BodyGuard extends Character{
 
-
-
-    public Assassin(int x, int y, boolean isRed){
-        super(x, y, isRed, "Assasin");
-        this.speed = 80;
-        this.health = 20;
-        this.maxHealth = 18;
-        this.startingHealth = 20;
+    public BodyGuard(int x, int y, boolean isRed) {
+        super(x, y, isRed, "BodyGuard");
+        this.speed = 200;
+        this.health = 50;
+        this.maxHealth = 10;
+        this.startingHealth = 150;
         this.farDamage = 0;
-        this.closeMinDamage = 6;
-        this.closeMaxDamage = 12;
-        this.target = null;
+        this.closeMinDamage = 0;
+        this.closeMaxDamage = 40;
+        this.score = 1;
     }
 
     public Character findTarget(){
-        return Map.BFS_Closest_Enmy(x, y, this);
+        return Map.BFS_Closest_Friend(x, y, this);
     }
 
     public void handleFighting(){
@@ -40,7 +38,7 @@ public class Assassin extends Character{
                 Character enemy = t.contents.get();
                 if(enemy.isEnemy(this)){
                     int damage = this.getMeleeDamage();
-                    Console.log("Assassin has inflicted: " + damage + " damage to " + enemy.getClass().getSimpleName());
+                    Console.log("Body Guard has inflicted: " + damage + " damage to " + enemy.getClass().getSimpleName());
                     enemy.takeDamage(damage);
                 }
                 break;
@@ -52,7 +50,7 @@ public class Assassin extends Character{
     public void handleMovementLogic(){
 
         if(currMove <= speed) return;
-        // Target might get killer so then the assassin should relocate.
+
         if(target == null || !Handler.getTokens().contains(target)){
             target = findTarget();
         }
@@ -62,24 +60,19 @@ public class Assassin extends Character{
         }
 
         boolean[] moves = Map.getPossibleMoves(x, y, SIZE);
-
         Point move = this.handleDirectedMovement(target.x, target.y, moves);
         moveBy(move.x, move.y);
-
-        if (move.x == 0 && move.y == 0){
-            super.handleMovementLogic();
-        }
 
     }
 
     public Character copy(){
-        return new Assassin(0, 24, true);
+        return new BodyGuard(0, 24, true);
     }
 
     public ArrayList<String> parseInfo(){
         var out = super.parseInfo();
-        out.add("Moves towards a certain target.");
+        out.add("Moves towards");
+        out.add("Closest Friend");
         return out;
     }
-
 }

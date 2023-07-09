@@ -11,7 +11,6 @@ import java.util.Collections;
 
 public class Healer extends Character{
 
-    Character target;
     public Healer(int x, int y, boolean isRed) {
         super(x, y, isRed, "Healer");
         this.speed = 90;

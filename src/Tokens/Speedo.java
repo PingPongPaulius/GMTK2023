@@ -9,24 +9,22 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Assassin extends Character{
+public class Speedo extends Character{
 
-
-
-    public Assassin(int x, int y, boolean isRed){
-        super(x, y, isRed, "Assasin");
-        this.speed = 80;
-        this.health = 20;
-        this.maxHealth = 18;
-        this.startingHealth = 20;
+    public Speedo(int x, int y, boolean isRed) {
+        super(x, y, isRed, "Speedo");
+        this.speed = 20;
+        this.health = 10;
+        this.maxHealth = 10;
+        this.startingHealth = 10;
         this.farDamage = 0;
-        this.closeMinDamage = 6;
-        this.closeMaxDamage = 12;
+        this.closeMinDamage = 40;
+        this.closeMaxDamage = 41;
         this.target = null;
     }
 
     public Character findTarget(){
-        return Map.BFS_Closest_Enmy(x, y, this);
+        return Map.BFS_Furthest_Shooting(this);
     }
 
     public void handleFighting(){
@@ -38,9 +36,9 @@ public class Assassin extends Character{
         for(Tile t: tiles){
             if(!t.isEmpty()){
                 Character enemy = t.contents.get();
-                if(enemy.isEnemy(this)){
+                if(enemy.isEnemy(this) && enemy.getFarDamage() > 0){
                     int damage = this.getMeleeDamage();
-                    Console.log("Assassin has inflicted: " + damage + " damage to " + enemy.getClass().getSimpleName());
+                    Console.log("Speedo has inflicted: " + damage + " damage to " + enemy.getClass().getSimpleName());
                     enemy.takeDamage(damage);
                 }
                 break;
@@ -73,13 +71,13 @@ public class Assassin extends Character{
     }
 
     public Character copy(){
-        return new Assassin(0, 24, true);
+        return new Speedo(0, 24, true);
     }
 
     public ArrayList<String> parseInfo(){
         var out = super.parseInfo();
-        out.add("Moves towards a certain target.");
+        out.add("Focuses a furthest enemy.");
+        out.add("Ignores melee damage units.");
         return out;
     }
-
 }

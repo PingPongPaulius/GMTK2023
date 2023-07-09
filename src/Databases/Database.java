@@ -18,6 +18,10 @@ public class Database {
         characters.add(new Tank(0,24, true));
         characters.add(new Wizard(0,24,true));
         characters.add(new GoofyDevil(0, 24, true));
+        characters.add(new BodyGuard(0, 24, true));
+        characters.add(new Speedo(0,24,true));
+        characters.add(new HillBilly(0,24,true));
+        characters.add(new Lawyer(0,24, true));
     }
 
     public static void reverseRole(Character c){
@@ -30,16 +34,22 @@ public class Database {
             reversed = new Archer(c.getX(), c.getY(), c.isRed());
         }
         else if(c instanceof GoofyDevil){
-            reversed = new Assassin(c.getX(), c.getY(), c.isRed());
-        }
-        else if(c instanceof Assassin){
-            reversed = new GoofyDevil(c.getX(), c.getY(), c.isRed());
+            reversed = new Healer(c.getX(), c.getY(), c.isRed());
         }
         else if(c instanceof Healer){
-            reversed = new Wizard(c.getX(), c.getY(), c.isRed());
+            reversed = new GoofyDevil(c.getX(), c.getY(), c.isRed());
+        }
+        else if(c instanceof Assassin){
+            reversed = new BodyGuard(c.getX(), c.getY(), c.isRed());
+        }
+        else if(c instanceof BodyGuard){
+            reversed = new Assassin(c.getX(), c.getY(), c.isRed());
         }
         else if(c instanceof Wizard){
-            reversed = new Healer(c.getX(), c.getY(), c.isRed());
+            reversed = new HillBilly(c.getX(), c.getY(), c.isRed());
+        }
+        else if(c instanceof HillBilly){
+            reversed = new Wizard(c.getX(), c.getY(), c.isRed());
         }
         else{
             return;

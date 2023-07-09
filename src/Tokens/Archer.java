@@ -10,8 +10,6 @@ import java.util.Collections;
 
 public class Archer extends Character{
 
-    Character target;
-
     public Archer(int x, int y, boolean isRed) {
         super(x, y, isRed, "Archer");
         this.speed = 100;

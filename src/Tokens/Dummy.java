@@ -11,7 +11,7 @@ public class Dummy extends Character{
         this.speed = 2000;
         this.health = 1;
         this.maxHealth = 1;
-        this.farDamage = 0;
+        this.farDamage = 10;
         this.closeMinDamage = 100;
         this.closeMaxDamage = 200;
     }

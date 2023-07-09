@@ -32,6 +32,8 @@ public class Character extends Token{
     public int score = 1;
 
     public int startingHealth = 100;
+
+    protected Character target;
     public Character(int x, int y, boolean isRed, String SpriteName){
         this.sprite = new Sprite(SpriteName, SIZE* Tile.SIZE,SIZE* Tile.SIZE);
         this.x = x;
@@ -39,6 +41,7 @@ public class Character extends Token{
         Map.map[x][y].contents = Optional.of(this);
         this.isRed = isRed;
         currMove = 0;
+        target= null;
     }
 
     public Sprite getIcon(){
@@ -163,6 +166,14 @@ public class Character extends Token{
 
     public int getMaxHealth() {
         return maxHealth;
+    }
+
+    public int getFarDamage() {
+        return farDamage;
+    }
+
+    public void changeSides(){
+        isRed = !isRed;
     }
 
     public Character copy(){

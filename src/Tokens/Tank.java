@@ -11,8 +11,6 @@ import java.util.Collections;
 
 public class Tank extends Character{
 
-    Character target;
-
     public Tank(int x, int y, boolean isRed) {
         super(x, y, isRed, "Warrior");
         this.speed = 140;

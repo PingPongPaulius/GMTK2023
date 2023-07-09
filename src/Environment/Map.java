@@ -109,6 +109,18 @@ public class Map {
         return null;
     }
 
+    public static Character BFS_Furthest_Shooting(Character t){
+
+        for (Tile[] tiles : map) {
+            for (Tile tile : tiles) {
+                if (!tile.isEmpty() && tile.contents.get().isEnemy(t) && tile.contents.get().getFarDamage() > 0) {
+                    return tile.contents.get();
+                }
+            }
+        }
+        return null;
+    }
+
     public void render(Graphics2D g){
 
         for(int i = 0; i < map.length; i++){
