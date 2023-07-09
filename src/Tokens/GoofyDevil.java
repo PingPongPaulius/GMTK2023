@@ -39,8 +39,8 @@ public class GoofyDevil extends Character{
 
         if(currMove <= speed) return;
 
-        int x = Game.RANDOM.nextInt(0, 25);
-        int y = Game.RANDOM.nextInt(0, 25);
+        int x = Game.RANDOM.nextInt(25);
+        int y = Game.RANDOM.nextInt(25);
 
         Tile t = Map.map[x][y];
 

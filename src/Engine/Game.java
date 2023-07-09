@@ -90,8 +90,11 @@ public class Game extends JFrame implements Runnable {
             Handler.add(new Dummy(0, 0, false));
         }
         if(currLevel == 1){
-            Handler.add(new HillBilly(13, 0, false));
-            Handler.add(new HillBilly(0, 13, false));
+            Handler.add(new Assassin(13, 0, false));
+            Handler.add(new Assassin(0, 13, false));
+            Handler.add(new Tank(0, 10, false));
+            Handler.add(new Assassin(24, 10, false));
+            Handler.add(new Speedo(12, 10, false));
         }
         if(currLevel == 2){
             //musicPlayer.play();

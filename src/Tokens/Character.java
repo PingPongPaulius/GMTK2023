@@ -130,7 +130,7 @@ public class Character extends Token{
     }
 
     public int getMeleeDamage(){
-        return Game.RANDOM.nextInt(this.closeMinDamage, this.closeMaxDamage);
+        return Game.RANDOM.nextInt(this.closeMaxDamage) + this.closeMinDamage;
     }
 
     @Override

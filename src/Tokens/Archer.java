@@ -54,7 +54,7 @@ public class Archer extends Character{
 
         if(!damaged){
             int damage = 0;
-            if(Map.distBetween(this, target) <= 5 || Game.RANDOM.nextInt(0, 2) == 1){
+            if(Map.distBetween(this, target) <= 5 || Game.RANDOM.nextInt(2) == 1){
                 damage = this.farDamage;
                 target.takeDamage(damage);
             }
