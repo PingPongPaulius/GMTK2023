@@ -9,6 +9,7 @@ import IO.Mouse;
 import Tokens.*;
 import Tokens.Character;
 import com.sun.source.tree.WhileLoopTree;
+import jdk.jshell.spi.SPIResolutionException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,8 @@ public class Game extends JFrame implements Runnable {
     private Keyboard keyboard;
     private Mouse mouse;
 
+    private Sprite goldCoin;
+
     Handler handler;
 
     public Map map;
@@ -35,6 +38,10 @@ public class Game extends JFrame implements Runnable {
     private boolean started;
     private int currLevel;
 
+    public static int score;
+
+    //private MusicPlayer musicPlayer;
+
     public Game(int width, int height) {
 
         this.handler = new Handler();
@@ -42,11 +49,12 @@ public class Game extends JFrame implements Runnable {
         this.keyboard = new Keyboard();
         this.mouse = new Mouse();
         this.hud = new HUD();
+        //this.musicPlayer = new MusicPlayer("Based Legitness");
         SIZE.setSize(width, height);
 
         renderWindow = new Canvas();
         renderWindow.setSize(SIZE);
-
+        this.goldCoin = new Sprite("GoldCoin", 32, 32);
         this.setTitle("Role Switch");
         this.setSize(SIZE);
         this.setResizable(false);
@@ -70,7 +78,7 @@ public class Game extends JFrame implements Runnable {
 
         this.started = false;
 
-        currLevel = 0;
+        currLevel = 1;
         loadLevel();
     }
 
@@ -82,6 +90,7 @@ public class Game extends JFrame implements Runnable {
         }
 
         if(currLevel == 1){
+            //musicPlayer.play();
             Handler.add(new Archer(15, 0, false));
             Handler.add(new Tank(15, 1, false));
             Handler.add(new Assassin(0, 10, false));
@@ -118,6 +127,9 @@ public class Game extends JFrame implements Runnable {
             //----------------------------------------------------------
             graphics.setColor(Color.BLACK);
             graphics.fillRect(0, 0, SIZE.width, SIZE.height);
+            this.goldCoin.render((Graphics2D) graphics, 10, 10);
+            graphics.setColor(Color.WHITE);
+            graphics.drawString(""+score, 50, 30);
             map.render((Graphics2D) graphics);
             Console.render((Graphics2D) graphics);
             if(started) {

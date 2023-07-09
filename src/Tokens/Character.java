@@ -29,6 +29,8 @@ public class Character extends Token{
     protected final int SIZE = 1;
     protected int currMove = 0;
 
+    public int score = 1;
+
     public int startingHealth = 100;
     public Character(int x, int y, boolean isRed, String SpriteName){
         this.sprite = new Sprite(SpriteName, SIZE* Tile.SIZE,SIZE* Tile.SIZE);
@@ -174,6 +176,7 @@ public class Character extends Token{
         output.add("Min Melee Damage: " + closeMinDamage);
         output.add("Max Melee Damage: " + closeMaxDamage);
         output.add("Ranged Damage: " + farDamage);
+        output.add("Gold Coin Cost: " + score);
         return output;
     }
 

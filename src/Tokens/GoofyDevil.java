@@ -62,6 +62,7 @@ public class GoofyDevil extends Character{
         out.add("Moves randomly");
         out.add("One-shots anything adjacent");
         out.add("dies after a one-shot");
+        out.add("gold coin cost: " + score);
         return out;
     }
 

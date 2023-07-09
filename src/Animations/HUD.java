@@ -107,6 +107,7 @@ public class HUD {
                 if(t.isEmpty()) {
                     selected.setPos(t.point.x, t.point.y);
                     Handler.add(selected);
+                    if(currLevel > 1) Game.score += selected.score;
                     selected = null;
                 }
                 else{

@@ -21,6 +21,7 @@ public class Archer extends Character{
         this.farDamage = 3;
         this.closeMinDamage = 0;
         this.closeMaxDamage = 2;
+        this.score = 2;
         this.target = null;
     }
 
