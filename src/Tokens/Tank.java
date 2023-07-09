@@ -22,7 +22,7 @@ public class Tank extends Character{
         this.farDamage = 0;
         this.closeMinDamage = 1;
         this.closeMaxDamage = 2;
-        this.score = 2;
+        this.score = 1;
         target = null;
     }
 

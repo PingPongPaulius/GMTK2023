@@ -78,7 +78,7 @@ public class Game extends JFrame implements Runnable {
 
         this.started = false;
 
-        currLevel = 1;
+        currLevel = 0;
         loadLevel();
     }
 
@@ -169,7 +169,8 @@ public class Game extends JFrame implements Runnable {
                     graphics.fillRect(60, 60, 200, 20);
                     graphics.setColor(new Color(255,255, 255));
                     graphics.drawString("<- Enemy has background blue.", 60, 75);
-
+                    graphics.drawString("<- Goal is to try and minimise the total cost of the army", 60, 30);
+                    graphics.drawString("This round the troops are on me ;)", 60, 45);
                     graphics.drawString("Chose your fighter by clicking on them.", 750, 20);
                 }
                 started = hud.renderPrepPhase((Graphics2D) graphics, mouse, currLevel);
