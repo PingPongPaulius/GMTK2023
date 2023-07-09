@@ -46,10 +46,16 @@ public class Database {
             reversed = new Assassin(c.getX(), c.getY(), c.isRed());
         }
         else if(c instanceof Wizard){
-            reversed = new HillBilly(c.getX(), c.getY(), c.isRed());
+            reversed = new Speedo(c.getX(), c.getY(), c.isRed());
         }
-        else if(c instanceof HillBilly){
+        else if(c instanceof Speedo){
             reversed = new Wizard(c.getX(), c.getY(), c.isRed());
+        }
+        else if (c instanceof HillBilly){
+            reversed = new Lawyer(c.getX(), c.getY(), c.isRed());
+        }
+        else if (c instanceof Lawyer){
+            reversed = new HillBilly(c.getX(), c.getY(), c.isRed());
         }
         else{
             return;

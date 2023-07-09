@@ -78,7 +78,7 @@ public class Game extends JFrame implements Runnable {
 
         this.started = false;
 
-        currLevel = 0;
+        currLevel = 4;
         loadLevel();
     }
 
@@ -103,6 +103,34 @@ public class Game extends JFrame implements Runnable {
             Handler.add(new Wizard(13, 5, false));
             Handler.add(new Healer(4, 0, false));
             Handler.add(new Healer(13, 4, false));
+        }
+        if(currLevel == 3){
+            Handler.add(new Archer(2, 1, false));
+            Handler.add(new Healer(1, 1, false));
+            Handler.add(new Healer(3, 1, false));
+            Handler.add(new Healer(2, 0, false));
+            Handler.add(new BodyGuard(5, 5, false));
+            Handler.add(new BodyGuard(6, 5, false));
+            Handler.add(new Archer(2+15, 1, false));
+            Handler.add(new Healer(1+15, 1, false));
+            Handler.add(new Healer(3+15, 1, false));
+            Handler.add(new Healer(2+15, 0, false));
+            Handler.add(new BodyGuard(5+15, 5, false));
+            Handler.add(new BodyGuard(6+15, 5, false));
+            Handler.add(new Speedo(7+15, 5, false));
+            Handler.add(new Speedo(7+15, 5, false));
+        }
+        if(currLevel == 4){
+            for(int i = 0; i < MAP_SIZE; i++){
+                if(i%2==0){
+                    Handler.add(new Archer(i, 0, false));
+                    Handler.add(new Tank(i, 13, false));
+                }
+                else{
+                    Handler.add(new Wizard(i, 0, false));
+                    Handler.add(new Speedo(i, 13, false));
+                }
+            }
         }
 
         ++currLevel;

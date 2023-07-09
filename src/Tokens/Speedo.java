@@ -51,7 +51,7 @@ public class Speedo extends Character{
 
         if(currMove <= speed) return;
         // Target might get killer so then the assassin should relocate.
-        if(target == null || !Handler.getTokens().contains(target)){
+        if(target == null ||target.isRed == this.isRed|| !Handler.getTokens().contains(target)){
             target = findTarget();
         }
         // If Target is still null don't move.

@@ -66,7 +66,7 @@ public class Tank extends Character{
 
         if(currMove <= speed) return;
 
-        if(target == null || !Handler.getTokens().contains(target)){
+        if(target == null ||target.isRed == this.isRed|| !Handler.getTokens().contains(target)){
             target = findTarget();
         }
         // If Target is still null don't move.
