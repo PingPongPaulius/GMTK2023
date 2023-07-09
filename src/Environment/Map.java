@@ -136,6 +136,12 @@ public class Map {
 
     }
 
+    public static int distBetween(Point a, Point b){
+
+        return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+
+    }
+
     public static Point getCoordinate(int x, int y){
         return new Point(20+x*Tile.SIZE, 50+y*Tile.SIZE);
     }

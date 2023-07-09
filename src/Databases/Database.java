@@ -22,6 +22,8 @@ public class Database {
         characters.add(new Speedo(0,24,true));
         characters.add(new HillBilly(0,24,true));
         characters.add(new Lawyer(0,24, true));
+        characters.add(new MinePlacer(0, 24, true));
+        characters.add(new Slower(0, 24, true));
     }
 
     public static void reverseRole(Character c){
@@ -46,9 +48,9 @@ public class Database {
             reversed = new Assassin(c.getX(), c.getY(), c.isRed());
         }
         else if(c instanceof Wizard){
-            reversed = new Speedo(c.getX(), c.getY(), c.isRed());
+            reversed = new MinePlacer(c.getX(), c.getY(), c.isRed());
         }
-        else if(c instanceof Speedo){
+        else if(c instanceof MinePlacer){
             reversed = new Wizard(c.getX(), c.getY(), c.isRed());
         }
         else if (c instanceof HillBilly){
@@ -56,6 +58,12 @@ public class Database {
         }
         else if (c instanceof Lawyer){
             reversed = new HillBilly(c.getX(), c.getY(), c.isRed());
+        }
+        else if (c instanceof Speedo){
+            reversed = new Slower(c.getX(), c.getY(), c.isRed());
+        }
+        else if (c instanceof Slower){
+            reversed = new Speedo(c.getX(), c.getY(), c.isRed());
         }
         else{
             return;

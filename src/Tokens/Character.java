@@ -57,6 +57,10 @@ public class Character extends Token{
         this.x = x;
         this.y = y;
         Map.map[this.x][this.y].contents = Optional.of(this);
+        if(Map.map[this.x][this.y].isMined) {
+            this.health -= 50;
+            Map.map[this.x][this.y].unMine();
+        }
     }
 
     @Override

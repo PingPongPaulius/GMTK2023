@@ -12,9 +12,11 @@ public class Tile {
     public Optional<Character> contents;
     public final Point point;
     public static int SIZE = 32;
+    public boolean isMined;
     public Tile(int x, int y){
         this.contents = Optional.empty();
         this.point = new Point(x, y);
+        isMined = false;
     }
 
     public boolean isEmpty(){
@@ -32,6 +34,14 @@ public class Tile {
         }
         g.fillRect(x, y, SIZE, SIZE);
 
+    }
+
+    public void placeMine(){
+        isMined = true;
+    }
+
+    public void unMine(){
+        isMined = false;
     }
 
 }
