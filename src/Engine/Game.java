@@ -8,10 +8,7 @@ import IO.Keyboard;
 import IO.Mouse;
 import Tokens.*;
 import Tokens.Character;
-import com.sun.source.tree.WhileLoopTree;
-import jdk.jshell.spi.SPIResolutionException;
 
-import javax.net.ssl.SNIHostName;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
@@ -39,7 +36,9 @@ public class Game extends JFrame implements Runnable {
     private boolean started;
     private int currLevel;
 
-    public static int score;
+    public static int score = 20;
+
+    public static int speedUp = 20;
 
     //private MusicPlayer musicPlayer;
 
@@ -79,7 +78,7 @@ public class Game extends JFrame implements Runnable {
 
         this.started = false;
 
-        currLevel = 0;
+        currLevel = 5;
         loadLevel();
     }
 

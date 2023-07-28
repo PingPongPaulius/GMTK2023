@@ -108,7 +108,7 @@ public class HUD {
                     selected.setPos(t.point.x, t.point.y);
                     Handler.add(selected);
                     if(currLevel > 1) Game.score += selected.score;
-                    selected = null;
+                    selected = selected.copy();
                 }
                 else{
                     System.out.println("Cant Place here");

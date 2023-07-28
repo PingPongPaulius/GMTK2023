@@ -66,7 +66,7 @@ public class Wizard extends Character{
             }
             currMove = 0;
         }
-        currMove++;
+        currMove+=Game.speedUp;
     }
 
     public void fake(){

@@ -34,34 +34,33 @@ public class Character extends Token{
     public int startingHealth = 100;
 
     protected Character target;
-    public Character(int x, int y, boolean isRed, String SpriteName){
-        this.sprite = new Sprite(SpriteName, SIZE* Tile.SIZE,SIZE* Tile.SIZE);
-        this.x = x;
-        this.y = y;
-        Map.map[x][y].contents = Optional.of(this);
-        this.isRed = isRed;
-        currMove = 0;
-        target= null;
-    }
+    public Character(int x, int y, boolean isRed, String SpriteName)                                {
+        this.sprite = new Sprite(SpriteName, SIZE* Tile.SIZE,SIZE* Tile.SIZE)                   ;
+        this.x = x                                                                                      ;
+        this.y = y                                                                                      ;
+        Map.map[x][y].contents = Optional.of(this)                                              ;
+        this.isRed = isRed                                                                              ;
+        currMove = 0                                                                                    ;
+        target= null                                                                                    ;
+                                                                                                    }
 
     public Sprite getIcon(){
-        return this.sprite;
+        return this.sprite                                                          ;
     }
 
-    public void setSide(boolean isRed){
-        this.isRed = isRed;
+                                                        public void setSide(boolean isRed){
+                                                            this.isRed = isRed;
     }
 
-    public void setPos(int x, int y){
-        Map.map[this.x][this.y].contents = Optional.empty();
+    public void setPos(int x, int y)                                                    {
+                                                                                    Map.map[this.x][this.y].contents = Optional.empty();
         this.x = x;
-        this.y = y;
-        Map.map[this.x][this.y].contents = Optional.of(this);
-        if(Map.map[this.x][this.y].isMined) {
-            this.health -= 50;
-            Map.map[this.x][this.y].unMine();
-        }
-    }
+                                                                                                            this.y = y;
+                                        Map.map[this.x][this.y].contents = Optional.of(this);
+                                                                                            if(Map.map[this.x][this.y].isMined) {
+                                                               this.health -= 50;
+                                                    Map.map[this.x][this.y].unMine();}
+                                                        }
 
     @Override
     public void update() {
@@ -72,20 +71,20 @@ public class Character extends Token{
             Handler.remove(this);
         }
         if(currMove > speed) currMove = 0;
-        currMove++;
+        currMove+=20;
     }
 
     public void handleFighting(){
 
         if(currMove <= speed) return;
 
-        ArrayList<Tile> tiles = Map.getAdjacentTiles(x, y);
-        Collections.shuffle(tiles);
-        for(Tile t: tiles){
-            if(!t.isEmpty()){
-                Character enemy = t.contents.get();
+                                                            ArrayList<Tile> tiles = Map.getAdjacentTiles(x, y);
+                                                                Collections.shuffle(tiles);
+                                                                                                                for(Tile t: tiles){
+                    if(!t.isEmpty()){
+                                                                Character enemy = t.contents.get();
                 if(enemy.isEnemy(this)){
-                    enemy.takeDamage(getMeleeDamage());
+                                                                                enemy.takeDamage(getMeleeDamage());
                 }
                 break;
             }
@@ -93,16 +92,15 @@ public class Character extends Token{
     }
 
     public void handleMovementLogic(){
-        boolean[] moves = Map.getPossibleMoves(x, y, SIZE);
+                                                                    boolean[] moves = Map.getPossibleMoves(x, y, SIZE);
 
         int move = Game.RANDOM.nextInt(moves.length);
 
         if(moves[move] && currMove > speed){
             if(moves[move]) {
-                int x = 0, y = 0;
+                                                        int x = 0, y = 0;
                 if (move == 0) x -= 1;
-                if (move == 1) x += 1;
-                if (move == 2) y += 1;
+                                                                                                                        if (move == 1) x += 1;if (move == 2) y += 1;
                 if (move == 3) y -= 1;
                 moveBy(x, y);
             }
@@ -111,17 +109,17 @@ public class Character extends Token{
     }
 
     public void takeDamage(int x){
-        health -= x;
-        this.sprite.overlay(x > 0);
+                                                                                            health -= x;
+                            this.sprite.overlay(x > 0);
     }
 
     public Point handleDirectedMovement(int goalX, int goalY, boolean[] moves){
 
-        ArrayList<Point> possibleMoves = new ArrayList<>();
+                                                                    ArrayList<Point> possibleMoves = new ArrayList<>();
 
         if(goalX > this.x && moves[1]) possibleMoves.add(new Point(1, 0));
-        if (goalX < this.x && moves[0]) possibleMoves.add(new Point(-1, 0));
-        if (goalY > this.y && moves[2]) possibleMoves.add(new Point(0, 1));
+                                                                                                                if (goalX < this.x && moves[0]) possibleMoves.add(new Point(-1, 0));
+                                                                        if (goalY > this.y && moves[2]) possibleMoves.add(new Point(0, 1));
         if (goalY < this.y && moves[3]) possibleMoves.add(new Point(0, -1));
 
         if(possibleMoves.isEmpty()) return new Point(0, 0);
@@ -130,14 +128,14 @@ public class Character extends Token{
     }
 
     public int getMeleeDamage(){
-        return Game.RANDOM.nextInt(this.closeMaxDamage) + this.closeMinDamage;
+                                                        return Game.RANDOM.nextInt(this.closeMaxDamage) + this.closeMinDamage;
     }
 
     @Override
     public void render(Graphics2D g) {
 
-        Point tile = Map.getCoordinate(x, y);
-        sprite.render(g, tile.x, tile.y);
+                                                                Point tile = Map.getCoordinate(x, y);
+                                    sprite.render(g, tile.x, tile.y);
 
     }
 
@@ -151,8 +149,8 @@ public class Character extends Token{
 
     public void moveBy(int x, int y){
         Map.map[this.x][this.y].contents = Optional.empty();
-        this.x += x;
-        this.y += y;
+                                                                                                                        this.x += x;
+                                                                            this.y += y;
         Map.map[this.x][this.y].contents = Optional.of(this);
     }
 
@@ -186,13 +184,13 @@ public class Character extends Token{
 
     public ArrayList<String> parseInfo(){
         var output = new ArrayList<String>();
-        output.add("Speed: " + speed);
-        output.add("Max Health: " + maxHealth);
-        output.add("Min Melee Damage: " + closeMinDamage);
-        output.add("Max Melee Damage: " + closeMaxDamage);
-        output.add("Ranged Damage: " + farDamage);
-        output.add("Gold Coin Cost: " + score);
-        return output;
+                                                                    output.add("Speed: " + speed);
+                                                                                output.add("Max Health: " + maxHealth);
+                                                        output.add("Min Melee Damage: " + closeMinDamage);
+                                                                                                 output.add("Max Melee Damage: " + closeMaxDamage);
+                                                                                                                    output.add("Ranged Damage: " + farDamage);
+                                                                    output.add("Gold Coin Cost: " + score);
+                                                                                                 return output;
     }
 
 }
